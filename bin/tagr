@@ -1,0 +1,14 @@
+#!/usr/bin/env coffee
+
+#require('coffee-script/register');
+
+#require('../lib/completion');
+
+process.title = 'tagr';
+
+tagr = require '../lib/tag-release'
+
+tagr.cli.start (err) ->
+  if !err
+    tagr.cli.log.info 'Tagger'.grey + ' done'.green.bold
+  process.exit(if err then 1 else 0)
