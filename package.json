@@ -1,21 +1,21 @@
 {
-  "name": "tagged-release",
+  "name": "tagr",
   "version": "0.0.1",
   "private": false,
   "scripts": {
-    "tag-release": "node app.js"
+    "postinstall" : "./bin/post-install"
   },
   "repository": {
-
+    "type" : "git",
+    "url" : "https://github.com/anshulverma/node-tagged-release"
   },
   "dependencies": {
     "coffee-script": "1.7.1",
     "flatiron": "0.3.11",
     "pkginfo": "0.3.0",
-    "colors": "0.6.2"
-  },
-  "devDependencies": {
-
+    "colors": "0.6.2",
+    "complete": "0.4.3",
+    "optimist": "0.6.1"
   },
   "bin": {
     "tagr": "./bin/tagr"

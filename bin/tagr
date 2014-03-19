@@ -1,14 +1,20 @@
-#!/usr/bin/env coffee
+#!/usr/bin/env node
 
-#require('coffee-script/register');
+(function() {
+  var tagr;
 
-#require('../lib/completion');
+  require('coffee-script/register');
+  require('../lib/modules/completion');
 
-process.title = 'tagr';
+  process.title = 'tagr';
 
-tagr = require '../lib/tag-release'
+  tagr = require('../lib/tag-release');
 
-tagr.cli.start (err) ->
-  if !err
-    tagr.cli.log.info 'Tagger'.grey + ' done'.green.bold
-  process.exit(if err then 1 else 0)
+  tagr.cli.start(function(err) {
+    if (!err) {
+      tagr.cli.log.info('Tagger'.grey + ' done'.green.bold);
+    }
+    return process.exit(err ? 1 : 0);
+  });
+
+}).call(this);

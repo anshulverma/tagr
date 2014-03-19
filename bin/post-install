@@ -1,0 +1,51 @@
+#!/usr/bin/env coffee
+
+path = require 'path'
+fs   = require 'fs'
+exec = require('child_process').exec
+
+getRc = ->
+  if process.platform isnt 'darwin' then return path.join(process.env.HOME || process.env.USERPROFILE, '.bashrc')
+
+  files = ['.bash_profile', '.bash_login', '.profile']
+  l = files.length
+
+  for i in [0..l]
+    try
+      file = path.join(process.env.HOME, files[i])
+      fs.statSync(file)
+      return file
+
+  # If none exist, create a .bash_profile.
+  return path.join(process.env.HOME, '.bash_profile');
+
+bashrc = getRc()
+data = ''
+err =
+
+try
+  data = String(fs.readFileSync(bashrc));
+catch ex
+  err = ex
+
+source = ''
+if ((err && err.code is 'ENOENT') || !~data.indexOf('# NODE-COMPLETE'))
+  exec 'tagr --install', (err, stdout) ->
+    if err?
+      console.error err.message
+      process.exit(-1)
+    fs.appendFile(bashrc, stdout, (err) ->
+      if err?
+        console.error 'Unable to append to ' + bashrc + ' [' + err.message + ']'
+        process.exit(-3)
+      console.log 'Added completion script to ' + bashrc
+      exec 'mkdir -p $HOME/.node-completion', (err) ->
+        if err?
+          console.error 'Unable to create node-completion folder'
+          process.exit(-4)
+        exec('source ' + bashrc, (err) ->
+          if (err?)
+            console.error('Unable to re-source ' + bashrc + '[' + err.message + ']')
+          console.log('Added node autocomplete')
+        )
+    )

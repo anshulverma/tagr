@@ -1,5 +1,6 @@
 flatiron = require 'flatiron'
-path     = require  'path'
+path     = require 'path'
+optimist = require 'optimist'
 
 app = module.exports = flatiron.app
 
@@ -8,21 +9,32 @@ require('pkginfo')(module, 'name', 'version')
 app.use(
   flatiron.plugins.cli,
   {
-    usage: require('./usage'),
-    version: true,
-    argv: {
-      version: {
-        alias: 'v',
-        description: 'version id',
+    usage: require('./usage')
+    version: true
+    argv:
+      version:
+        description: 'version id'
         string: true
-      },
-      message: {
-        alias: 'm',
-        description: 'optional message to add to your version commit',
+      message:
+        description: 'optional message to add to your version commit'
         string: true
-      }
-    },
+      name:
+        description: 'your name'
+        string: true
     dir: path.join(__dirname, 'commands')
+    prompt:
+      message: '>'
+      delimiter: '>'
+      properties:
+        name:
+          decription: 'Enter your name'
+          type: 'string'
+          pattern: /^[a-zA-Z\s\-]+$/
+          message: 'Name must be only letters, spaces, or dashes'
+          required: true
+          hidden: false
+        password:
+          hidden: true
   });
 
 app.cmd('hello', ->
@@ -42,6 +54,7 @@ app.start = (callback) ->
 
     if parseInt(minor, 10) % 2
       app.log.warn 'You are using unstable version of node.js. You may experience problems.'
+    app.prompt.override = optimist.argv
     return app.exec app.argv._, callback
 
 app.exec = (command, callback) ->
@@ -58,8 +71,6 @@ app.exec = (command, callback) ->
     return if app.initialized then execCommand() else app.setup(execCommand)
   catch e
     app.showError command.join(' '), e
-  finally
-    app.cleanup()
 
 
 app.setup = (callback) ->
@@ -75,5 +86,3 @@ app.showError = (command, err, shallow, skip) ->
   app.log.error 'Error: ' + 'Unable to execute "' + command + '" [ ' + err.message + ' ]'
   app.log.error err.stack
 
-app.cleanup = () ->
-  app.log.info 'Exiting...'
