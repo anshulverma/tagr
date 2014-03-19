@@ -13,6 +13,8 @@
   tagr.cli.start(function(err) {
     if (!err) {
       tagr.cli.log.info('Tagger'.grey + ' done'.green.bold);
+    } else {
+      tagr.cli.log.error('Tagger'.grey + (' error: ' + err.message).red.bold);
     }
     return process.exit(err ? 1 : 0);
   });

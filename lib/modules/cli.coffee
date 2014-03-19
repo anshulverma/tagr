@@ -45,7 +45,7 @@ app.initialized  = false;
 
 app.start = (callback) ->
   app.init (err) ->
-    if typeof err isnt 'undefined'
+    if err?
       app.welcome()
       app.showError app.argv._.join ' ', err
       return callback(err)
@@ -63,7 +63,7 @@ app.exec = (command, callback) ->
     fullCommand = command.join(' ')
     if fullCommand then app.log.info 'Executing command ' + fullCommand.magenta
     app.router.dispatch 'on', fullCommand, app.log, (err, shallow) ->
-      if typeof err isnt 'undefined'
+      if err?
         app.showError fullCommand, err, shallow
         return callback(err)
       callback();
