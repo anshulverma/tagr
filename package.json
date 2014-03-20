@@ -15,12 +15,15 @@
   },
   "dependencies": {
     "coffee-script": "1.7.1",
-    "flatiron": "0.3.11",
+    "flatiron": "git+https://github.com/anshulverma/flatiron.git",
     "pkginfo": "0.3.0",
     "colors": "0.6.2",
     "complete": "0.4.3",
     "optimist": "0.6.1"
   },
+  "bundledDependencies": [
+      "flatiron"
+  ],
   "keywords": [
       "cli",
       "tag",
@@ -33,6 +36,7 @@
     "tagr": "./bin/tagr"
   },
   "engines": {
-    "node": ">= 0.8.x"
+    "node": ">= 0.8.x",
+    "npm": ">= 1.1.65"
   }
 }
