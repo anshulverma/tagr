@@ -1,7 +1,11 @@
 {
   "name": "tagr",
   "version": "0.0.1",
+  "preferGlobal": "true",
+  "description": "A command line tool to tag release versions of a project using any type of source control",
   "private": false,
+  "author": "Anshul Verma <anshul.verma86@gmail.com>",
+  "maintainers": [ "Anshul Verma <anshul.verma86@gmail.com>" ],
   "scripts": {
     "postinstall" : "./bin/post-install"
   },
@@ -17,7 +21,18 @@
     "complete": "0.4.3",
     "optimist": "0.6.1"
   },
+  "keywords": [
+      "cli",
+      "tag",
+      "release",
+      "git",
+      "source control",
+      "tools"
+  ],
   "bin": {
     "tagr": "./bin/tagr"
+  },
+  "engines": {
+    "node": ">= 0.8.x"
   }
 }
