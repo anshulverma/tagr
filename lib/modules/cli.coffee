@@ -12,22 +12,22 @@ app.use(
     usage: require('./usage')
     version: true
     argv:
-      version:
-        description: 'version id'
+      tag:
+        description: 'tag ID that should be applied to version a new release'
+        alias: 't'
         string: true
       message:
-        description: 'optional message to add to your version commit'
+        description: 'optional message to add to your new tag commit'
         string: true
     dir: path.join(__dirname, 'commands')
     prompt:
-      message: '>'
-      delimiter: '>'
+      override: true
       properties:
-        version:
-          decription: 'Enter new version'
+        tag:
+          decription: 'Enter new tag id'
           type: 'string'
           pattern: /^[0-9]+\.[0-9]+\.[0-9]+$/
-          message: 'Version must be of the form N.N.N (where N is a number)'
+          message: 'Tag must be of the form N.N.N (where N is a number)'
           required: true
           hidden: false
   })
@@ -45,7 +45,7 @@ app.start = (callback) ->
 
     if parseInt(minor, 10) % 2
       app.log.warn 'You are using unstable version of node.js. You may experience problems.'
-    app.prompt.override = optimist.argv
+#    app.prompt.override = optimist.argv
     return app.exec app.argv._, callback
 
 app.exec = (command, callback) ->
