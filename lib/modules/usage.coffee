@@ -12,7 +12,7 @@ module.exports = [
 
   'Usage:'.cyan.bold.underline,
   '',
-  '  tagr [command] [-v <version>] [-m <message>]',
+  '  tagr [command] [--version <version>] [--message <message>]',
   '',
 
   'Common Commands:'.cyan.bold.underline,
@@ -22,11 +22,11 @@ module.exports = [
   '  tagr new',
   '',
 
-  'To get list of version'.cyan,
+  'To get list of version(s)'.cyan,
   '  tagr list',
   '',
 
-  'To get next version'.cyan,
-  '  tagr next',
+  'To get details of current version'.cyan,
+  '  tagr current',
   ''
 ];

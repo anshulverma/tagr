@@ -18,30 +18,21 @@ app.use(
       message:
         description: 'optional message to add to your version commit'
         string: true
-      name:
-        description: 'your name'
-        string: true
     dir: path.join(__dirname, 'commands')
     prompt:
       message: '>'
       delimiter: '>'
       properties:
-        name:
-          decription: 'Enter your name'
+        version:
+          decription: 'Enter new version'
           type: 'string'
-          pattern: /^[a-zA-Z\s\-]+$/
-          message: 'Name must be only letters, spaces, or dashes'
+          pattern: /^[0-9]+\.[0-9]+\.[0-9]+$/
+          message: 'Version must be of the form N.N.N (where N is a number)'
           required: true
           hidden: false
-        password:
-          hidden: true
-  });
+  })
 
-app.cmd('hello', ->
-  app.prompt.get('name', (err, result) ->
-    app.log.info('hello '+result.name+'!')))
-
-app.initialized  = false;
+app.ready = false;
 
 app.start = (callback) ->
   app.init (err) ->
@@ -68,15 +59,15 @@ app.exec = (command, callback) ->
         return callback(err)
       callback();
   try
-    return if app.initialized then execCommand() else app.setup(execCommand)
+    return if app.ready then execCommand() else app.setup(execCommand)
   catch e
     app.showError command.join(' '), e
 
 
 app.setup = (callback) ->
-  if app.initialized is true
+  if app.ready is true
     return callback()
-  app.initialized = true;
+  app.ready = true;
   callback()
 
 app.welcome = () ->
