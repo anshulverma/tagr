@@ -18,7 +18,14 @@ app.use(
         string: true
       message:
         description: 'optional message to add to your new tag commit'
+        alias: 'm'
         string: true
+      help:
+        description: 'print this help information'
+        alias: 'h'
+      version:
+        description: 'prints version of tagr that you are running'
+        alias: 'v'
     dir: path.join(__dirname, 'commands')
     prompt:
       override: true

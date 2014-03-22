@@ -6,27 +6,27 @@ module.exports = [
   ' /   / / /_/ / /_/ / /__ / \\ '.cyan,
   '',
 
-  'Node.js application tagger utility',
+  'Application tagger utility',
   'https://github.com/anshulverma/node-tagged-release',
   '',
 
   'Usage:'.cyan.bold.underline,
   '',
-  '  tagr [command] [--version <version>] [--message <message>]',
+  '  tagr { -v | -h } [command [-t <tag>] [-m <message>]]',
   '',
 
   'Common Commands:'.cyan.bold.underline,
   '',
 
-  'To create a new version'.cyan,
+  'To create a new tag'.cyan,
   '  tagr new',
   '',
 
-  'To get list of version(s)'.cyan,
+  'To get list of tag(s)'.cyan,
   '  tagr list',
   '',
 
-  'To get details of current version'.cyan,
-  '  tagr current',
+  'To get details of current tag'.cyan,
+  '  tagr show',
   ''
 ];

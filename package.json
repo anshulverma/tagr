@@ -1,13 +1,15 @@
 {
   "name": "tagr",
   "version": "0.0.1",
+  "main": "./bin/tagr",
   "preferGlobal": "true",
   "description": "A command line tool to tag release versions of a project using any type of source control",
   "private": false,
   "author": "Anshul Verma <anshul.verma86@gmail.com>",
   "maintainers": [ "Anshul Verma <anshul.verma86@gmail.com>" ],
   "scripts": {
-    "postinstall" : "./bin/post-install"
+    "postinstall": "./scripts/post-install",
+    "prepublish": "./scripts/pre-publish"
   },
   "repository": {
     "type" : "git",
@@ -20,6 +22,9 @@
     "colors": "0.6.2",
     "complete": "0.4.3",
     "optimist": "0.6.1"
+  },
+  "devDependencies": {
+    "ronn": "0.4.0"
   },
   "bundledDependencies": [
       "flatiron"
@@ -38,5 +43,11 @@
   "engines": {
     "node": ">= 0.8.x",
     "npm": ">= 1.1.65"
+  },
+  "directories": {
+    "man": "./man",
+    "doc": "./doc",
+    "lib": "./lib",
+    "bin": "./bin"
   }
 }

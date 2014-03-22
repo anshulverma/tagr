@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+./scripts/doc-build ./doc/tagr.md ./man/man1/tagr.1
+./scripts/doc-build ./doc/tagr-new.md ./man/man1/tagr-new.1
+./scripts/doc-build ./doc/tagr-list.md ./man/man1/tagr-list.1
+./scripts/doc-build ./doc/tagr-next.md ./man/man1/tagr-next.1
+./scripts/doc-build ./doc/tagr-show.md ./man/man1/tagr-show.1

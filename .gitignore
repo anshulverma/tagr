@@ -4,3 +4,6 @@ npm-debug.log
 # Intellij IDEA
 .idea/
 *.iml
+
+# documentation build file
+/man/
